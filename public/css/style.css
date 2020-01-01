@@ -1,0 +1,60 @@
+.sidebar {
+	background-color: #4D384B;
+}
+
+.dashboard-body {
+	background-color: #F0F0F0;
+	font-family: 'Nunito', sans-serif;
+}
+
+.navbar-custom {
+	background-color: #FFF;
+}
+
+.logo {
+	background-color: #FFF;
+	padding: 8px 29px;
+  font-weight: bold;
+  color: #4d384b;
+  font-size: 20px;
+}
+
+.nav-active {
+	background-color: #3e2d3c;
+}
+
+.nav-link {
+	text-align: center;
+}
+
+.nav-link:hover {
+	background-color: #3e2d3c;	
+}
+
+.btn-pink {
+	background-color: #FF6468;
+	color: #FFF !important;
+}
+
+.btn-pink:hover {
+	background-color: #f75155;
+	color: #FFF;
+}
+
+.btn-kelu {
+	background-color: #4d384bc2;
+	color: #FFF;
+}
+
+.btn-kelu:hover {
+	background-color: #4d384bfa;
+	color: #FFF;
+}
+
+.screen-title {
+	color: #7b7373;
+}
+
+.tblborder {
+	border: solid 1px #CCC;
+}
