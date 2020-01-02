@@ -54,31 +54,31 @@
               </a>
             </li>
             <li class="nav-item p-1">
-              <a class="nav-link" href="{{ route('students.index') }}" style="text-align: center;">
+              <a class="nav-link" href="{{ route('customers.index') }}" style="text-align: center;">
                 <img src="/img/student.png" style="height: 40px;"><br/>
-                <span style=" color: #FEFEFE; font-size: 14px;">  Students </span> 
+                <span style=" color: #FEFEFE; font-size: 14px;">  Customers </span> 
               </a>
             </li>
             <li class="nav-item p-1">
-              <a class="nav-link" href="{{ route('courses.index') }}" style="text-align: center;">
+              <a class="nav-link" href="{{ route('products.index') }}" style="text-align: center;">
                 <img src="/img/homework.png" style="height: 40px;"><br/>
-                <span style=" color: #FEFEFE; font-size: 14px;">  Courses </span> 
+                <span style=" color: #FEFEFE; font-size: 14px;">  Products </span> 
               </a>
             </li>
             <li class="nav-item p-1">
-              <a class="nav-link" href="{{ route('streams.index') }}" style="text-align: center;">
+              <a class="nav-link" href="" style="text-align: center;">
                 <img src="/img/stream.png" style="height: 40px;"><br/>
                 <span style=" color: #FEFEFE; font-size: 14px;">  Streams </span> 
               </a>
             </li>
             <li class="nav-item p-1">
-              <a class="nav-link" href="{{ route('years.index') }}" style="text-align: center;">
+              <a class="nav-link" href="" style="text-align: center;">
                 <img src="/img/calendar.png" style="height: 40px;"><br/>
                 <span style=" color: #FEFEFE; font-size: 14px;">  Year </span> 
               </a>
             </li>
             <li class="nav-item p-1">
-              <a class="nav-link" href="{{ route('semesters.index') }}" style="text-align: center;">
+              <a class="nav-link" href="" style="text-align: center;">
                 <img src="/img/library.png" style="height: 40px;"><br/>
                 <span style=" color: #FEFEFE; font-size: 14px;">  Semester </span> 
               </a>

@@ -4,7 +4,7 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <div align="center" style="font-size: 34px; font-weight: bold;color: #6d6d6d;margin-bottom: 5px; ">WEBANIX</div>
+            <div align="center" style="font-size: 34px; font-weight: bold;color: #6d6d6d;margin-bottom: 5px; ">MILKWAY</div>
             <div class="card">
                 <div class="card-header">{{ __('Login') }}</div>
 
