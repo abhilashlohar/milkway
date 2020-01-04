@@ -27,7 +27,7 @@
 
 <body class="dashboard-body" style="font-family: 'Montserrat', sans-serif;">
   <nav class="navbar sticky-top flex-md-nowrap p-0 navbar-custom">
-    <a class="navbar-brand col-sm-3 col-md-2 mr-0 logo" href="#">WEBANIX</a>
+    <a class="navbar-brand col-sm-3 col-md-2 mr-0 logo" href="#">MILKWAY</a>
     <ul class="nav justify-content-end mr-3">
       <li class="nav-item mr-3" style="padding: 5px; color: #4d384b;">
         <span>Welcome, {{ Auth::user()->name }}</span>
@@ -60,12 +60,12 @@
               </a>
             </li>
             <li class="nav-item p-1">
-              <a class="nav-link" href="{{ route('products.index') }}" style="text-align: center;">
+              <a class="nav-link" href="{{ route('sales_vouchers.index') }}" style="text-align: center;">
                 <img src="/img/homework.png" style="height: 40px;"><br/>
-                <span style=" color: #FEFEFE; font-size: 14px;">  Products </span> 
+                <span style=" color: #FEFEFE; font-size: 14px;">  Sales Vouchers </span> 
               </a>
             </li>
-            <li class="nav-item p-1">
+            <!--<li class="nav-item p-1">
               <a class="nav-link" href="" style="text-align: center;">
                 <img src="/img/stream.png" style="height: 40px;"><br/>
                 <span style=" color: #FEFEFE; font-size: 14px;">  Streams </span> 
@@ -82,7 +82,7 @@
                 <img src="/img/library.png" style="height: 40px;"><br/>
                 <span style=" color: #FEFEFE; font-size: 14px;">  Semester </span> 
               </a>
-            </li>
+            </li>-->
             <li class="nav-item p-1">
               <a class="nav-link" href="{{ route('users.index') }}" style="text-align: center;">
                 <img src="/img/user.png" style="height: 40px;"><br/>

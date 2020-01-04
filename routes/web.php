@@ -23,3 +23,4 @@ Route::get('/', 'HomeController@index')->name('home');
 Route::resource('users','UserController');
 Route::resource('customers','CustomerController');
 Route::resource('products','ProductController');
+Route::resource('sales_vouchers','SalesVoucherController');
