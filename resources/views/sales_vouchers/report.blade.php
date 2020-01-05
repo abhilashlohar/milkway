@@ -2,6 +2,10 @@
  
 @section('content')
     <div class="row">
+        <div class="col-md-12" style="text-align: center;">
+            <h4>{{ @$customer->name }}</h4></div>
+    </div>
+    <div class="row">
       <div class="col-md-12">
         <div class="card">
             <div class="card-header">
@@ -22,12 +26,12 @@
                     <tr>
                         <td>{{ $key }}</td>
                         <td>{{ @$val['qty'] }}</td>
-                        <td>{{ @$val['amount'] }}</td>
+                        <td>{{ round(@$val['amount'],2) }}</td>
                     </tr>
                     @endforeach  
                     <tr style="background-color: #f3f3f3;">
                         <td colspan="2">Total</td>
-                        <td>{{ $total }}/-</td>
+                        <td>{{ round($total,2) }}/-</td>
                     </tr>                  
                 </table>
             </div>
@@ -59,13 +63,13 @@
                             <td>{{ @$split_data[1] }}</td>
                             <td>{{ @$split_data[0] }}</td>
                             <td>{{ @$data['qty'] }}</td>
-                            <td>{{ @$data['amount'] }}</td>
+                            <td>{{ round(@$data['amount'],2) }}</td>
                         </tr>
-                        <?php $grand_total +=$data['amount']; ?>
+                        <?php $grand_total +=round($data['amount'],2); ?>
                         @endforeach 
                         <tr style="background-color: #f3f3f3;">
                         <td colspan="3">Total</td>
-                        <td>{{ $grand_total }}/-</td>
+                        <td>{{ round($grand_total,2) }}/-</td>
                     </tr>  
                     </table>
                     

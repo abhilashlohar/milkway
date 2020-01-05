@@ -106,7 +106,7 @@
                 @enderror
             </td>
             <td>
-                <input id="qty" type="text" class="form-control @error('qty') is-invalid @enderror" name="qty" value="{{ old('qty') }}" required="required">
+                <input id="qty" type="number" class="form-control @error('qty') is-invalid @enderror" name="qty" value="{{ old('qty') }}" required="required" step="any">
             </td>
             <td>
                 <a class="btn btn-danger delete-tr input-sm" href="#" role="button" style="margin-bottom: 1px;"><i class="fa fa-times"></i></a>

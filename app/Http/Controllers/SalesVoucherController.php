@@ -196,17 +196,17 @@ class SalesVoucherController extends Controller
                     if(!empty($sales_voucher_row->product))
                     {
                         @$firstArr[@$sales_voucher_row->product->name]['qty'] += $sales_voucher_row->qty;
-                        @$firstArr[@$sales_voucher_row->product->name]['amount'] += $sales_voucher_row->qty*$sales_voucher_row->product->rate;
-                        $total += $sales_voucher_row->qty*$sales_voucher_row->product->rate;
+                        @$firstArr[@$sales_voucher_row->product->name]['amount'] += round($sales_voucher_row->qty*$sales_voucher_row->product->rate,2);
+                        $total += round($sales_voucher_row->qty*$sales_voucher_row->product->rate,2);
                         $date = (date('d/m/Y', strtotime($sales_voucher->create_date)) != '01-01-1970') ? date('d-m-Y', strtotime($sales_voucher->create_date)) : "-";
                         @$secondArr[@$sales_voucher_row->product->name.'~'.$date]['qty'] +=@$sales_voucher_row->qty;
-                        @$secondArr[@$sales_voucher_row->product->name.'~'.$date]['amount'] +=@$sales_voucher_row->qty*$sales_voucher_row->product->rate;
+                        @$secondArr[@$sales_voucher_row->product->name.'~'.$date]['amount'] +=round(@$sales_voucher_row->qty*$sales_voucher_row->product->rate,2);
                     }
                 }
             }
        } 
-        $customers = Customer::all()->where('deleted', false);
-        $products = Product::all()->where('deleted', false);
-        return view('sales_vouchers.report',compact('sales_vouchers','request','customers','products','firstArr','total','secondArr'));
+        $customer = Customer::all()->where('deleted', false)->where('id', $request->customer_id)->first();
+       
+        return view('sales_vouchers.report',compact('sales_vouchers','request','customers','firstArr','total','secondArr'));
     }
 }
