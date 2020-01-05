@@ -5,26 +5,20 @@
       <div class="col-md-12">
         <div class="card">
             <div class="card-header">
-              <span class="float-left">Sales Voucher Search</span>
+              <span class="float-left">Report Filter</span>
               <div class="float-right">
-				<a href=""> Add New Sales Voucher</a>
+				
                 </div>
             </div>
             
             <div class="card-body">
-                <form action="" method="GET">
+                <form action="{{ route('sales_vouchers.report') }}" method="GET">
                   
                      <div class="row">
                         <div class="col-md-3">
                             <div class="form-group">
-                                <label>Voucher No</label>
-                                <input type="text" name="voucher_no" value="" class="form-control">
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="form-group">
                                 <label>Customer</label>
-                                <select name="course_id" id="course_id" class="form-control">
+                                <select name="customer_id" id="course_id" class="form-control" required>
                                     <option value="">---Select Customer---</option>
                                     @foreach ($customers as $customer)
                                         <option 
@@ -36,8 +30,14 @@
                         </div>
                         <div class="col-md-3">
                             <div class="form-group">
-                                <label>date</label>
-                                <input type="date" name="create_date" value="" class="form-control cDate">
+                                <label>From date</label>
+                                <input type="date" name="create_from" value="" class="form-control cDate" required>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>To date</label>
+                                <input type="date" name="create_to" value="" class="form-control cDate" required>
                             </div>
                         </div>
                         <div class="col-md-12">

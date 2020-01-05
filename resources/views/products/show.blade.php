@@ -25,7 +25,12 @@
                 <span class="ml-2"> {{ $products->unit_name }} </span>
               </div>
             </div>
-            
+            <div class="row mt-2">
+              <div class="col-md-4">
+                <span style="color: #575555;">Rate:</span>
+                <span class="ml-2"> {{ $products->rate }} </span>
+              </div>
+            </div>
             <br/>
           </div>
         </div>

@@ -60,18 +60,24 @@
               </a>
             </li>
             <li class="nav-item p-1">
+              <a class="nav-link" href="{{ route('products.index') }}" style="text-align: center;">
+                <img src="/img/library.png" style="height: 40px;"><br/>
+                <span style=" color: #FEFEFE; font-size: 14px;">  Products </span> 
+              </a>
+            </li>
+            <li class="nav-item p-1">
               <a class="nav-link" href="{{ route('sales_vouchers.index') }}" style="text-align: center;">
                 <img src="/img/homework.png" style="height: 40px;"><br/>
                 <span style=" color: #FEFEFE; font-size: 14px;">  Sales Vouchers </span> 
               </a>
             </li>
-            <!--<li class="nav-item p-1">
-              <a class="nav-link" href="" style="text-align: center;">
+            <li class="nav-item p-1">
+              <a class="nav-link" href="{{ route('sales_vouchers.report_filter') }}" style="text-align: center;">
                 <img src="/img/stream.png" style="height: 40px;"><br/>
-                <span style=" color: #FEFEFE; font-size: 14px;">  Streams </span> 
+                <span style=" color: #FEFEFE; font-size: 14px;">  Report </span> 
               </a>
             </li>
-            <li class="nav-item p-1">
+            <!--<li class="nav-item p-1">
               <a class="nav-link" href="" style="text-align: center;">
                 <img src="/img/calendar.png" style="height: 40px;"><br/>
                 <span style=" color: #FEFEFE; font-size: 14px;">  Year </span> 

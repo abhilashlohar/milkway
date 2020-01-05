@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Product extends Model
 {
     protected $fillable = [
-      'name', 'unit_name'
+      'name', 'unit_name', 'rate'
      ];
 
 
@@ -28,6 +28,7 @@ class Product extends Model
       return [
           'name' => 'required',
           'unit_name' => 'required',
+          'rate' => 'required',
       ];
     }
 
@@ -36,6 +37,7 @@ class Product extends Model
       return [
           'name.required' => 'You must enter name.',
           'unit_name.required' => 'You must enter unit name.',
+          'rate.required' => 'You must enter rate.',
       ];
     }
 

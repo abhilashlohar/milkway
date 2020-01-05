@@ -24,7 +24,7 @@
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label>Customer</label>
-                                <select name="course_id" id="course_id" class="form-control">
+                                <select name="customer_id" id="customer_id" class="form-control">
                                     <option value="">---Select Customer---</option>
                                     @foreach ($customers as $customer)
                                         <option 

@@ -30,7 +30,7 @@ class SalesVoucherController extends Controller
         })->paginate(30);
         
         $customers = Customer::all()->where('deleted', false);
-        $products = Product::all();
+        $products = Product::all()->where('deleted', false);
         return view('sales_vouchers.index',compact('sales_vouchers','request','customers','products'))
         ->with('i', (request()->input('page', 1) - 1) * 5);
     }
@@ -43,7 +43,7 @@ class SalesVoucherController extends Controller
     public function create()
     {
         $customers = Customer::all()->where('deleted', false);
-        $products = Product::all();
+        $products = Product::all()->where('deleted', false);
         return view('sales_vouchers.create',compact('customers','products'));
     }
 
@@ -57,7 +57,7 @@ class SalesVoucherController extends Controller
     {
        
         $voucher_no = SalesVoucher::select('voucher_no')->where('deleted', false)
-                                         ->orderBy('voucher_no')
+                                         ->orderBy('voucher_no','DESC')
                                          ->first();
         if(empty($voucher_no))
         {
@@ -103,7 +103,7 @@ class SalesVoucherController extends Controller
     public function edit($id)
     {
         $customers = Customer::all()->where('deleted', false);
-        $products = Product::all();
+        $products = Product::all()->where('deleted', false);
         $sales_voucher = SalesVoucher::where('id', $id)->with('Customer','SalesVoucherRow.product')->first();
         return view('sales_vouchers.edit',compact('sales_voucher', 'customers', 'products'));
     }
@@ -165,5 +165,48 @@ class SalesVoucherController extends Controller
   
         return redirect()->route('sales_vouchers.index')
                         ->with('success','Sales Voucher deleted successfully');
+    }
+
+    public function reportFilter()
+    {
+        $customers = Customer::all()->where('deleted', false);
+       return view('sales_vouchers.report_filter',compact('customers'));
+    }
+
+    public function report(Request $request)
+    {   
+        $sales_vouchers = SalesVoucher::where('deleted', false)->where(function($q) use ($request) {
+                if ($request->has('customer_id') and $request->customer_id) {
+                    $q->where('customer_id', $request->customer_id);
+                }
+                if ($request->has('create_from') and $request->create_from and $request->create_to) {
+                    $q->whereBetween('create_date',[$request->create_from, $request->create_to]);
+                }
+                /*if ($request->has('create_to') and $request->create_to) {
+                    $q->where('create_date','>=', $request->create_to);
+                }*/
+        })->orderBy('create_date', 'ASC')->paginate(500);
+        $firstArr=[];$total=0;$secondArr=[];
+       if(!empty($sales_vouchers))
+       {
+            foreach($sales_vouchers as $sales_voucher)
+            {
+               foreach($sales_voucher->SalesVoucherRow as $sales_voucher_row)
+                {
+                    if(!empty($sales_voucher_row->product))
+                    {
+                        @$firstArr[@$sales_voucher_row->product->name]['qty'] += $sales_voucher_row->qty;
+                        @$firstArr[@$sales_voucher_row->product->name]['amount'] += $sales_voucher_row->qty*$sales_voucher_row->product->rate;
+                        $total += $sales_voucher_row->qty*$sales_voucher_row->product->rate;
+                        $date = (date('d/m/Y', strtotime($sales_voucher->create_date)) != '01-01-1970') ? date('d-m-Y', strtotime($sales_voucher->create_date)) : "-";
+                        @$secondArr[@$sales_voucher_row->product->name.'~'.$date]['qty'] +=@$sales_voucher_row->qty;
+                        @$secondArr[@$sales_voucher_row->product->name.'~'.$date]['amount'] +=@$sales_voucher_row->qty*$sales_voucher_row->product->rate;
+                    }
+                }
+            }
+       } 
+        $customers = Customer::all()->where('deleted', false);
+        $products = Product::all()->where('deleted', false);
+        return view('sales_vouchers.report',compact('sales_vouchers','request','customers','products','firstArr','total','secondArr'));
     }
 }

@@ -16,12 +16,12 @@ class ProductController extends Controller
     {  
        $products = Product::where(function($q) use ($request) {
                 if ($request->has('name') and $request->name) {
-                    $q->where('name', 'ilike', $request->name);
+                    $q->where('name', 'LIKE', '%' . $request->name.'%' );
                 }
                 if ($request->has('unit_name') and $request->unit_name) {
-                    $q->where('unit_name', 'ilike', $request->unit_name);
+                    $q->where('unit_name', 'LIKE', '%' . $request->unit_name.'%');
                 }
-        })->paginate(30);
+        })->where('deleted', false)->paginate(30);
 
         return view('products.index',compact('products','request'))
         ->with('i', (request()->input('page', 1) - 1) * 5);
@@ -62,7 +62,7 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-        $products = Product::where('id', $id)->first();
+        $products = Product::where('id', $id)->where('deleted', false)->first();
         
         return view('products.show',compact('products'));
     }
@@ -102,8 +102,12 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Product $product)
     {
-        //
+        $product->deleted = true;
+        $product->save();
+  
+        return redirect()->route('products.index')
+                        ->with('success','Product deleted successfully');
     }
 }

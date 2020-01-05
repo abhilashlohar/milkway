@@ -53,6 +53,7 @@
                         <tr>
                             <th>Name</th>
                             <th>Unit Name</th>
+                            <th>Rate</th>
                             <th>Action</th>
                         </tr>
 
@@ -64,10 +65,19 @@
                                 </a>
                             </td>
                             <td>{{ $product->unit_name }}</td>
+                            <td>{{ $product->rate }}</td>
                             <td>
-                                <a class="btn btn-sm btn-light" href="{{ route('products.edit',$product->id) }}">
+                                <form action="{{ route('products.destroy',$product->id) }}" method="POST">
+                   
+                                    <a class="btn btn-sm btn-light" href="{{ route('products.edit',$product->id) }}">
                                       <i class="fas fa-edit"></i>
-                                </a>
+                                    </a>
+                   
+                                    @csrf
+                                    @method('DELETE')
+                      
+                                    <button class="btn btn-sm btn-light" type="submit"><i class="fas fa-trash-alt"></i></button>
+                                </form>
                             </td>
                         </tr>
                         @endforeach

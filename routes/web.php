@@ -19,7 +19,8 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/', 'HomeController@index')->name('home');
-Route::post('/sales_vouchers/filter', 'SalesVoucherController@filter')->name('sales_vouchers.filter');
+Route::get('/report-filter', 'SalesVoucherController@reportFilter')->name('sales_vouchers.report_filter');
+Route::get('/report', 'SalesVoucherController@report')->name('sales_vouchers.report');
 
 Route::resource('users','UserController');
 Route::resource('customers','CustomerController');

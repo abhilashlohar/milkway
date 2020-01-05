@@ -15,10 +15,10 @@ class CustomerController extends Controller
     {
         $customers = Customer::where('deleted', false)->where(function($q) use ($request) {
                 if ($request->has('name') and $request->name) {
-                    $q->where('name', 'ilike', $request->name);
+                    $q->where('name', 'LIKE', '%' . $request->name.'%');
                 }
                 if ($request->has('mobile') and $request->mobile) {
-                    $q->where('mobile', $request->mobile);
+                    $q->where('mobile', 'LIKE', '%' . $request->mobile.'%');
                 }
         })->paginate(30);
 
