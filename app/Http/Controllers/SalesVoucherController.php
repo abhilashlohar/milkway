@@ -185,7 +185,7 @@ class SalesVoucherController extends Controller
                 /*if ($request->has('create_to') and $request->create_to) {
                     $q->where('create_date','>=', $request->create_to);
                 }*/
-        })->orderBy('create_date', 'ASC')->paginate(500);
+        })->orderBy('create_date', 'ASC')->paginate(2000);
         $firstArr=[];$total=0;$secondArr=[];
        if(!empty($sales_vouchers))
        {
@@ -207,6 +207,6 @@ class SalesVoucherController extends Controller
        } 
         $customer = Customer::all()->where('deleted', false)->where('id', $request->customer_id)->first();
        
-        return view('sales_vouchers.report',compact('sales_vouchers','request','customers','firstArr','total','secondArr'));
+        return view('sales_vouchers.report',compact('sales_vouchers','request','customer','firstArr','total','secondArr'));
     }
 }
