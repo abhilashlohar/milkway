@@ -66,7 +66,7 @@
               </a>
             </li>
             <li class="nav-item p-1">
-              <a class="nav-link" href="{{ route('sales_vouchers.index') }}" style="text-align: center;">
+              <a class="nav-link" href="{{ route('sales_vouchers.create') }}" style="text-align: center;">
                 <img src="/img/homework.png" style="height: 40px;"><br/>
                 <span style=" color: #FEFEFE; font-size: 14px;">  Sales Vouchers </span> 
               </a>

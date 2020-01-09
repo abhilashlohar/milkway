@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class SalesVoucherRow extends Model
 {
     protected $fillable = [
-      'sales_voucher_id', 'product_id', 'qty'
+      'sales_voucher_id',  'qty','month_date'
      ];
 
 
@@ -21,6 +21,7 @@ class SalesVoucherRow extends Model
       'sales_voucher_id' => 'string',
       'product_id' => 'string',
       'qty' => 'string',
+      'month_date' => 'date:Y-m-d',
     ];
 
     public static function rules($id = '') 

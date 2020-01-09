@@ -21,6 +21,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/', 'HomeController@index')->name('home');
 Route::get('/report-filter', 'SalesVoucherController@reportFilter')->name('sales_vouchers.report_filter');
 Route::get('/report', 'SalesVoucherController@report')->name('sales_vouchers.report');
+Route::post('month_detail', 'SalesVoucherController@month_detail')->name('sales_vouchers.month_detail');
 
 Route::resource('users','UserController');
 Route::resource('customers','CustomerController');

@@ -8,7 +8,7 @@ use Illuminate\Validation\Rule;
 class SalesVoucher extends Model
 {
     protected $fillable = [
-      'voucher_no', 'customer_id', 'create_date'
+      'voucher_no', 'customer_id', 'create_date', 'month','product_id'
      ];
 
 
@@ -21,15 +21,16 @@ class SalesVoucher extends Model
       'id' => 'string',
       'voucher_no' => 'string',
       'customer_id' => 'string',
+      'month' => 'string',
       'create_date' => 'date:Y-m-d',
     ];
 
     public static function rules($id = '') 
     {
       return [
-          'voucher_no'  => 'required',
           'customer_id' => 'required',
           'create_date' => 'required',
+          'month'       => 'required',
       ];
     }
 

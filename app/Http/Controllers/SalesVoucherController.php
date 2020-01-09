@@ -35,6 +35,25 @@ class SalesVoucherController extends Controller
         ->with('i', (request()->input('page', 1) - 1) * 5);
     }
 
+    /*public function index(Request $request)
+    {
+        $sales_vouchers = SalesVoucher::where('deleted', false)->where(function($q) use ($request) {
+                if ($request->has('voucher_no') and $request->voucher_no) {
+                    $q->where('voucher_no', $request->voucher_no);
+                }
+                if ($request->has('customer_id') and $request->customer_id) {
+                    $q->where('customer_id', $request->customer_id);
+                }
+                if ($request->has('create_date') and $request->create_date) {
+                    $q->where('create_date', $request->create_date);
+                }
+        })->paginate(30);
+        
+        $customers = Customer::all()->where('deleted', false);
+        $products = Product::all()->where('deleted', false);
+        return view('sales_vouchers.index',compact('sales_vouchers','request','customers','products'))
+        ->with('i', (request()->input('page', 1) - 1) * 5);
+    }*/
     /**
      * Show the form for creating a new resource.
      *
@@ -55,27 +74,77 @@ class SalesVoucherController extends Controller
      */
     public function store(Request $request)
     {
-       
-        $voucher_no = SalesVoucher::select('voucher_no')->where('deleted', false)
-                                         ->orderBy('voucher_no','DESC')
-                                         ->first();
-        if(empty($voucher_no))
+        $check = SalesVoucher::where('month', $request->month)
+                               ->where('customer_id', $request->customer_id)
+                               ->where('product_id', $request->product_id)
+                               ->with('SalesVoucherRow.product')
+                               ->first(); 
+        $request->request->add(['create_date' => date('Y-m-d')]);
+        if(empty($check))
         {
-            $vno =1;
-        }
-        else{
-            $vno = $voucher_no->voucher_no+1;
-        }
-        $request->request->add(['voucher_no' => $vno]);
-        
-        $request->validate(SalesVoucher::rules(), SalesVoucher::messages());
-        $sales_voucher_rows = $request->sales_voucher_rows; 
-        $sales_voucher = SalesVoucher::create($request->all());
-        foreach($sales_voucher_rows as $sales_voucher_row)
-        {
+            $voucher_no = SalesVoucher::select('voucher_no')->where('deleted', false)
+                                             ->orderBy('voucher_no','DESC')
+                                             ->first();
+            if(empty($voucher_no))
+            {
+                $vno =1;
+            }
+            else{
+                $vno = $voucher_no->voucher_no+1;
+            }
+            $request->request->add(['voucher_no' => $vno]);
             
-            $finalData = array('sales_voucher_id'=>$sales_voucher->id, 'product_id'=> $sales_voucher_row['product_id'], 'qty'=> $sales_voucher_row['qty']);
-            SalesVoucherRow::create($finalData);
+            //dd($request);
+            $request->validate(SalesVoucher::rules(), SalesVoucher::messages());
+            $sales_voucher_rows = $request->sales_voucher_rows;
+
+            $sales_voucher = SalesVoucher::create($request->all());
+            foreach($sales_voucher_rows as $sales_voucher_row)
+            {
+
+                if($sales_voucher_row['qty']!="")
+                {
+                    $finalData = array('sales_voucher_id'=>$sales_voucher->id, 'qty'=> $sales_voucher_row['qty'],'month_date'=>date("Y-m-d",strtotime($sales_voucher_row['month_date'])));
+                     SalesVoucherRow::create($finalData);
+                }
+            }
+        }
+        else{ 
+            $request->validate(SalesVoucher::rules($check->id), SalesVoucher::messages());
+            
+            $sales_voucher_rows = $request->sales_voucher_rows; 
+            
+            $check->update($request->all());
+            if(!empty($sales_voucher_rows))
+            {
+                $ids=[]; 
+                foreach($sales_voucher_rows as $sales_voucher_row)
+                {
+                    if(!empty($sales_voucher_row['id']) && $sales_voucher_row['qty']=='')
+                    {
+                      $ids[] =  $sales_voucher_row['id'];
+                    }
+                } 
+                if(count($ids)>0)
+                {
+                    SalesVoucherRow::whereIn('id', $ids)->where('sales_voucher_id',$check->id)->delete(); 
+                }
+                foreach($sales_voucher_rows as $sales_voucher_row)
+                {
+                    if($sales_voucher_row['qty']!=''){
+                    if(!empty($sales_voucher_row['id']))
+                    {
+                        $data= array('qty'=> $sales_voucher_row['qty']);
+                        SalesVoucherRow::where('id', $sales_voucher_row['id'])
+                          ->update($data);
+                    }
+                    else{
+                        $finalData = array('sales_voucher_id'=>$check->id, 'qty'=> $sales_voucher_row['qty'],'month_date'=>date("Y-m-d",strtotime($sales_voucher_row['month_date'])));
+                        SalesVoucherRow::create($finalData);
+                    }
+                }
+                }
+            }
         }
         return redirect()->route('sales_vouchers.index')
                         ->with('success','Sales Voucher added successfully.');
@@ -208,5 +277,26 @@ class SalesVoucherController extends Controller
         $customer = Customer::all()->where('deleted', false)->where('id', $request->customer_id)->first();
        
         return view('sales_vouchers.report',compact('sales_vouchers','request','customer','firstArr','total','secondArr'));
+    }
+
+    public function month_detail(Request $request)
+    {   
+        $month = $request->year.'-'.$request->month; 
+        $sales_voucher = SalesVoucher::where('month', $month)
+                                       ->where('customer_id', $request->customer_id)
+                                       ->where('product_id', $request->product_id)
+                                       ->where('deleted', false)
+                                       ->with('SalesVoucherRow.product')
+                                       ->first();
+        $arr=[];$ids=[];
+        if(!empty($sales_voucher->SalesVoucherRow))
+        {
+            foreach($sales_voucher->SalesVoucherRow as $SalesVoucherRow)
+            {
+                 $arr[$sales_voucher->month][date("d-m-Y",strtotime($SalesVoucherRow->month_date))] = $SalesVoucherRow->qty;
+                 $ids[$sales_voucher->month][date("d-m-Y",strtotime($SalesVoucherRow->month_date))] = $SalesVoucherRow->id;
+            }
+        } 
+        return view('sales_vouchers.month_detail',compact('sales_vouchers','request','arr','month','ids'));
     }
 }
