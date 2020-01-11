@@ -27,3 +27,4 @@ Route::resource('users','UserController');
 Route::resource('customers','CustomerController');
 Route::resource('products','ProductController');
 Route::resource('sales_vouchers','SalesVoucherController');
+Route::resource('payment_vouchers','PaymentVoucherController');

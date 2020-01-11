@@ -72,18 +72,18 @@
               </a>
             </li>
             <li class="nav-item p-1">
+              <a class="nav-link" href="{{ route('payment_vouchers.index') }}" style="text-align: center;">
+                <img src="/img/calendar.png" style="height: 40px;"><br/>
+                <span style=" color: #FEFEFE; font-size: 14px;">  Payment Vouchers </span> 
+              </a>
+            </li>
+            <li class="nav-item p-1">
               <a class="nav-link" href="{{ route('sales_vouchers.report_filter') }}" style="text-align: center;">
                 <img src="/img/stream.png" style="height: 40px;"><br/>
                 <span style=" color: #FEFEFE; font-size: 14px;">  Report </span> 
               </a>
             </li>
             <!--<li class="nav-item p-1">
-              <a class="nav-link" href="" style="text-align: center;">
-                <img src="/img/calendar.png" style="height: 40px;"><br/>
-                <span style=" color: #FEFEFE; font-size: 14px;">  Year </span> 
-              </a>
-            </li>
-            <li class="nav-item p-1">
               <a class="nav-link" href="" style="text-align: center;">
                 <img src="/img/library.png" style="height: 40px;"><br/>
                 <span style=" color: #FEFEFE; font-size: 14px;">  Semester </span> 
