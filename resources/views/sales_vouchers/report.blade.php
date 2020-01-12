@@ -24,7 +24,7 @@
                     </tr>
                     @foreach ($firstArr as $key => $val)
                     <tr>
-                        <td>{{ $key }}</td>
+                        <td><a href="{{ route('sales_vouchers.product_report', @$productId[@$key]) }}">{{ $key }}</a></td>
                         <td>{{ @$val['qty'] }}</td>
                         <td>{{ round(@$val['amount'],2) }}</td>
                     </tr>
@@ -39,45 +39,7 @@
       </div>
     </div>
     <br>
-    <br>
-    @if ($sales_vouchers ?? '')
-        <div class="row">
-          <div class="col-md-12">
-            <div class="card">
-                <div class="card-header">
-                  <span class="float-left">Report  (Date Wise)</span>
-                  
-                </div>
-                <div class="card-body">
-                   <table class="table table-sm">
-                        <tr>
-                            <th>Date</th>
-                            <th>Product</th>
-                            <th>Quantity</th>
-                            <th>Amount</th>
-                        </tr>
-                        <?php $grand_total=0; ?>
-                        @foreach ($secondArr as $key1 => $data)
-                        <?php $split_data = explode('~',$key1); ?>
-                        <tr>
-                            <td>{{ @$split_data[1] }}</td>
-                            <td>{{ @$split_data[0] }}</td>
-                            <td>{{ @$data['qty'] }}</td>
-                            <td>{{ round(@$data['amount'],2) }}</td>
-                        </tr>
-                        <?php $grand_total +=round($data['amount'],2); ?>
-                        @endforeach 
-                        <tr style="background-color: #f3f3f3;">
-                        <td colspan="3">Total</td>
-                        <td>{{ round($grand_total,2) }}/-</td>
-                    </tr>  
-                    </table>
-                    
-                </div>
-            </div>
-          </div>
-        </div> 
-    @endif
+  
 @endsection
 @section('JS_Code')
 <script type="text/javascript">

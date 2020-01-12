@@ -54,4 +54,8 @@ class SalesVoucher extends Model
     public function SalesVoucherRow(){
       return $this->hasMany(SalesVoucherRow::class);
     }
+
+    public function product(){
+      return $this->belongsTo(Product::class);
+    }
 }

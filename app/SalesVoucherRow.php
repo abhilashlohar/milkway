@@ -19,7 +19,6 @@ class SalesVoucherRow extends Model
     protected $casts = [
       'id' => 'string',
       'sales_voucher_id' => 'string',
-      'product_id' => 'string',
       'qty' => 'string',
       'month_date' => 'date:Y-m-d',
     ];
@@ -28,7 +27,6 @@ class SalesVoucherRow extends Model
     {
       return [
           'sales_voucher_id' => 'required',
-          'product_id' => 'required',
           'qty' => 'required',
       ];
     }
@@ -36,7 +34,7 @@ class SalesVoucherRow extends Model
     public static function messages($id = '') 
     {
       return [
-          'product_id.required' => 'You must enter product name.',
+          'month_date.required' => 'You must enter date.',
       ];
     }
 
@@ -48,7 +46,6 @@ class SalesVoucherRow extends Model
     public function sales_voucher(){
       return $this->belongsTo(SalesVoucher::class);
     }
-
     public function product(){
       return $this->belongsTo(Product::class);
     }
