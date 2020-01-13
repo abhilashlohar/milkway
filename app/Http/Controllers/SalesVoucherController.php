@@ -6,6 +6,7 @@ use App\PaymentVoucher;
 use App\SalesVoucherRow;
 use App\Customer;
 use App\Product;
+use App\Setting;
 use Illuminate\Http\Request;
 use DB;
 
@@ -244,7 +245,27 @@ class SalesVoucherController extends Controller
     }
 
     public function report(Request $request)
-    {   
+    {  
+      //complete record of user
+       $complete_sales_vouchers = SalesVoucher::where('deleted', false)->where(function($q) use ($request) {
+                if ($request->has('customer_id') and $request->customer_id) {
+                    $q->where('customer_id', $request->customer_id);
+                }
+        })->orderBy('create_date', 'ASC')->get();
+       $complete_amt=0;
+       if(!empty($complete_sales_vouchers))
+       {
+            foreach($complete_sales_vouchers as $complete_sales_voucher)
+            {  
+               foreach($complete_sales_voucher->SalesVoucherRow as $sales_voucher_row)
+                {
+                    if(!empty($complete_sales_voucher->product))
+                    {
+                       $complete_amt += round($sales_voucher_row->qty*$complete_sales_voucher->product->rate,2);
+                    }
+                }
+            }
+       }
        $sales_vouchers = SalesVoucher::where('deleted', false)->where(function($q) use ($request) {
                 if ($request->has('customer_id') and $request->customer_id) {
                     $q->where('customer_id', $request->customer_id);
@@ -252,9 +273,6 @@ class SalesVoucherController extends Controller
                 if ($request->has('month') and $request->month) {
                     $q->where('month',$request->month);
                 }
-                /*if ($request->has('create_to') and $request->create_to) {
-                    $q->where('create_date','>=', $request->create_to);
-                }*/
         })->orderBy('create_date', 'ASC')->get();
        $firstArr=[];$total=0;$secondArr=[];$productId=[];
        if(!empty($sales_vouchers))
@@ -279,9 +297,9 @@ class SalesVoucherController extends Controller
        $customer = Customer::all()->where('deleted', false)->where('id', $request->customer_id)->first();
 
        $payment_voucher = PaymentVoucher::all()->where('deleted', false)->where('customer_id', $request->customer_id)->sum('amount');
-
        
-        return view('sales_vouchers.report',compact('sales_vouchers','request','customer','firstArr','total','secondArr','payment_vouchers','productId'));
+       $setting = Setting::all()->first();
+        return view('sales_vouchers.report',compact('sales_vouchers','request','customer','firstArr','total','secondArr','payment_voucher','productId','setting','complete_amt'));
     }
 
     public function month_detail(Request $request)

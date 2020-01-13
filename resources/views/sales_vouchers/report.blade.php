@@ -1,15 +1,25 @@
-@extends('layouts.dashboard')
+@extends('layouts.report')
  
 @section('content')
+<style type="text/css">
+@media print {
+    #printbtn {
+        display :  none;
+    }
+}
+</style>
     <div class="row">
+        <a id="printbtn" class="btn btn-light" href="{{ route('sales_vouchers.report_filter') }}" style="margin-left: 1%;COLOR: RED;">Back</a>
         <div class="col-md-12" style="text-align: center;">
-            <h4>{{ @$customer->name }}</h4></div>
+            <h5>{{ @$setting->firm_name }}</h5>
+            <h5>{{ @$setting->address }}</h5><br>
+        </div>
     </div>
     <div class="row">
       <div class="col-md-12">
         <div class="card">
             <div class="card-header">
-              <span class="float-left">Report (Product Wise)</span>
+              <div class="text-center"><strong>Report ({{ @$customer->name }})</strong></div>
               <div class="float-right">
 				
                 </div>
@@ -24,14 +34,28 @@
                     </tr>
                     @foreach ($firstArr as $key => $val)
                     <tr>
-                        <td><a href="{{ route('sales_vouchers.product_report', @$productId[@$key]) }}">{{ $key }}</a></td>
+                        <td>{{ $key }}</td>
                         <td>{{ @$val['qty'] }}</td>
                         <td>{{ round(@$val['amount'],2) }}</td>
                     </tr>
                     @endforeach  
-                    <tr style="background-color: #f3f3f3;">
-                        <td colspan="2">Total</td>
+                    <tr style="background-color: #f3f3f3 !important;">
+                        <td colspan="2">Total of {{ date("F,Y",strtotime($request->month)) }}</td>
                         <td>{{ round($total,2) }}/-</td>
+                    </tr>
+                    <tr style="background-color: #fbf0f0 !important;">
+                        <td colspan="2">Overall Amount</td>
+                        <td>{{ round($complete_amt,2) }}/-</td>
+                    </tr>
+                    <tr style="background-color: #fbf0f0 !important;">
+                        <td colspan="2">Total Receive Amount</td>
+                        <td>{{ round($payment_voucher,2) }}/-</td>
+                    </tr> 
+                    <tr style="background-color: #fbf0f0 !important;">
+                        <td colspan="2">Remaining Amount</td>
+                        <td>
+                        <?php $remaining_amt = round($complete_amt,2)-round($payment_voucher,2); ?>
+                        {{ round($remaining_amt,2) }}/-</td>
                     </tr>                  
                 </table>
             </div>

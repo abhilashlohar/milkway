@@ -85,7 +85,7 @@
                                 <button type="submit" class="btn btn-primary">
                                     {{ __('Save') }}
                                 </button>
-                                <a class="btn btn-light" href="{{ route('sales_vouchers.index') }}">Cancel</a>
+                                
                             </div>
                         </div>
 
