@@ -30,6 +30,9 @@
     <a class="navbar-brand col-sm-3 col-md-2 mr-0 logo" href="#">MILKWAY</a>
     <ul class="nav justify-content-end mr-3">
       <li class="nav-item mr-3" style="padding: 5px; color: #4d384b;">
+        <span><a href="{{ route('settings.index') }}">Setting</a></span>
+      </li>
+      <li class="nav-item mr-3" style="padding: 5px; color: #4d384b;">
         <span>Welcome, {{ Auth::user()->name }}</span>
       </li>
       <li class="nav-item">
@@ -66,9 +69,15 @@
               </a>
             </li>
             <li class="nav-item p-1">
-              <a class="nav-link" href="{{ route('sales_vouchers.index') }}" style="text-align: center;">
+              <a class="nav-link" href="{{ route('sales_vouchers.create') }}" style="text-align: center;">
                 <img src="/img/homework.png" style="height: 40px;"><br/>
                 <span style=" color: #FEFEFE; font-size: 14px;">  Sales Vouchers </span> 
+              </a>
+            </li>
+            <li class="nav-item p-1">
+              <a class="nav-link" href="{{ route('payment_vouchers.index') }}" style="text-align: center;">
+                <img src="/img/calendar.png" style="height: 40px;"><br/>
+                <span style=" color: #FEFEFE; font-size: 14px;">  Payment Vouchers </span> 
               </a>
             </li>
             <li class="nav-item p-1">
@@ -78,12 +87,6 @@
               </a>
             </li>
             <!--<li class="nav-item p-1">
-              <a class="nav-link" href="" style="text-align: center;">
-                <img src="/img/calendar.png" style="height: 40px;"><br/>
-                <span style=" color: #FEFEFE; font-size: 14px;">  Year </span> 
-              </a>
-            </li>
-            <li class="nav-item p-1">
               <a class="nav-link" href="" style="text-align: center;">
                 <img src="/img/library.png" style="height: 40px;"><br/>
                 <span style=" color: #FEFEFE; font-size: 14px;">  Semester </span> 

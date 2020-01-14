@@ -5,32 +5,23 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Validation\Rule;
 
-class SalesVoucher extends Model
+class PaymentVoucher extends Model
 {
     protected $fillable = [
-      'voucher_no', 'customer_id', 'create_date', 'month','product_id'
+      'customer_id', 'amount', 'month_date'
      ];
-
 
     public static function boot()
     {
         parent::boot();
     }
 
-    protected $casts = [
-      'id' => 'string',
-      'voucher_no' => 'string',
-      'customer_id' => 'string',
-      'month' => 'string',
-      'create_date' => 'date:Y-m-d',
-    ];
-
     public static function rules($id = '') 
     {
       return [
           'customer_id' => 'required',
-          'create_date' => 'required',
-          'month'       => 'required',
+          'amount' => 'required',
+          'month_date'       => 'required',
       ];
     }
 
@@ -38,7 +29,8 @@ class SalesVoucher extends Model
     {
       return [
           'customer_id.required' => 'You must enter customer name.',
-          'create_date.required' => 'You must enter date.',
+          'amount.required' => 'You must enter amount.',
+          'month_date.required' => 'You must enter date.'
       ];
     }
 
@@ -49,13 +41,5 @@ class SalesVoucher extends Model
 
     public function customer(){
       return $this->belongsTo(Customer::class);
-    }
-
-    public function SalesVoucherRow(){
-      return $this->hasMany(SalesVoucherRow::class);
-    }
-
-    public function product(){
-      return $this->belongsTo(Product::class);
     }
 }

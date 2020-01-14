@@ -30,8 +30,14 @@
                         </div>
                         <div class="col-md-3">
                             <div class="form-group">
-                                <label>Month</label>
-                                <input type="month" name="month" value="" class="form-control cDate" required>
+                                <label>From date</label>
+                                <input type="date" name="create_from" value="" class="form-control cDate" required>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>To date</label>
+                                <input type="date" name="create_to" value="" class="form-control cDate" required>
                             </div>
                         </div>
                         <div class="col-md-12">

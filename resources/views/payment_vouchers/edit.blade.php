@@ -5,19 +5,30 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Add New Product') }}</div>
+                <div class="card-header">{{ __('Edit Payment') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('products.store') }}">
+                    <form method="POST" action="{{ route('payment_vouchers.update', $payment_voucher->id) }}">
                         @csrf
+                        @method('PUT')
+
+                        
 
                         <div class="form-group row">
-                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
+                            <label for="customer_id" class="col-md-4 col-form-label text-md-right">{{ __('Customers') }}</label>
 
                             <div class="col-md-6">
-                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required >
+                                <select id="customer_id" name="customer_id" class="form-control @error('customer_id') is-invalid @enderror" required>
+                                    <option value="">--Select--</option>
+                                    @foreach ($customers as $customer)
+                                    <option 
+                                        value="{{ $customer->id }}" 
+                                        {{ ( $customer->id == $payment_voucher->customer_id ) ? 'selected' : '' }}> {{ $customer->name }} 
+                                    </option>
+                                    @endforeach
+                                </select>
 
-                                @error('name')
+                                @error('customer_id')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -26,12 +37,12 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="unit_name" class="col-md-4 col-form-label text-md-right">{{ __('Unit Name') }}</label>
+                            <label for="amount" class="col-md-4 col-form-label text-md-right">{{ __('Amount') }}</label>
 
                             <div class="col-md-6">
-                                <input id="unit_name" type="text" class="form-control @error('unit_name') is-invalid @enderror" name="unit_name" value="{{ old('unit_name') }}" >
+                                <input id="amount" type="number" class="form-control @error('amount') is-invalid @enderror" name="amount" value="{{ $payment_voucher->amount }}" step="any" required>
 
-                                @error('unit_name')
+                                @error('amount')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -40,12 +51,12 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="unit_name" class="col-md-4 col-form-label text-md-right">{{ __('Rate') }}</label>
+                            <label for="month_date" class="col-md-4 col-form-label text-md-right">{{ __('Date') }}</label>
 
                             <div class="col-md-6">
-                                <input id="rate" type="number" class="form-control @error('rate') is-invalid @enderror" name="rate" value="{{ old('rate') }}" step="any" required>
+                                <input id="month_date" type="date" class="form-control @error('month_date') is-invalid @enderror" name="month_date" value="{{ date('Y-m-d',strtotime($payment_voucher->month_date)) }}">
 
-                                @error('rate')
+                                @error('month_date')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -57,7 +68,6 @@
                                 <button type="submit" class="btn btn-primary">
                                     {{ __('Save') }}
                                 </button>
-                                <a class="btn btn-light" href="{{ route('products.index') }}">Cancel</a>
                             </div>
                         </div>
                     </form>
