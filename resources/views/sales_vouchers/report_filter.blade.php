@@ -1,6 +1,7 @@
 @extends('layouts.dashboard')
  
 @section('content')
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/3.2/select2.css" rel="stylesheet" />
     <div class="row">
       <div class="col-md-12">
         <div class="card">
@@ -18,7 +19,7 @@
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label>Customer</label>
-                                <select name="customer_id" id="course_id" class="form-control" required>
+                                <select name="customer_id" id="customer_id" class="form-control" required>
                                     <option value="">---Select Customer---</option>
                                     @foreach ($customers as $customer)
                                         <option 
@@ -74,9 +75,15 @@
 @section('JS_Code')
 <script type="text/javascript">
 $( document ).ready(function() {
+<<<<<<< HEAD
 $( "#month" ).datepicker({ dateFormat: 'yy-mm' });
     
 
+=======
+
+     $( "#month" ).datepicker({ dateFormat: 'yy-mm' });
+     $("#customer_id").select2();
+>>>>>>> fe3bb8be773879df5bf86363c7c862d077db1518
 });
 </script>
 @endsection

@@ -25,7 +25,12 @@
                 <span class="ml-2"> {{ $customers->mobile }} </span>
               </div>
             </div>
-            
+            <div class="row mt-2">
+              <div class="col-md-4">
+                <span style="color: #575555;">Address:</span>
+                <span class="ml-2"> {{ $customers->address }} </span>
+              </div>
+            </div>
             <br/>
           </div>
         </div>

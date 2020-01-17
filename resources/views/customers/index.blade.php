@@ -58,6 +58,7 @@
                         <tr>
                             <th>Name</th>
                             <th>Mobile</th>
+                            <th>Address</th>
                             <th>Action</th>
                         </tr>
 
@@ -69,6 +70,7 @@
                                 </a>
                             </td>
                             <td>{{ $customer->mobile }}</td>
+                            <td>{{ $customer->address }}</td>
                             <td>
                                 <form action="{{ route('customers.destroy',$customer->id) }}" method="POST">
                    

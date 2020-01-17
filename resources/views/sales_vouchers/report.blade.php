@@ -3,13 +3,14 @@
 @section('content')
 <style type="text/css">
 @media print {
-    #printbtn {
+    .printbtn {
         display :  none;
     }
 }
 </style>
     <div class="row">
-        <a id="printbtn" class="btn btn-light" href="{{ route('sales_vouchers.report_filter') }}" style="margin-left: 1%;COLOR: RED;">Back</a>
+        <a id="printbtn" class="btn btn-light printbtn" href="{{ route('sales_vouchers.report_filter') }}" style="margin-left: 1%;COLOR: RED;">Back</a>
+        <button id="print" class="btn btn-light printbtn" style="margin-left: 1%;COLOR: RED;float:right;" name="Print" onclick="print();">Print</button>
         <div class="col-md-12" style="text-align: center;">
             <h5>{{ @$setting->firm_name }}</h5>
             <h5>{{ @$setting->address }}</h5><br>
@@ -20,6 +21,7 @@
         <div class="card">
             <div class="card-header">
               <div class="text-center"><strong>Report ({{ @$customer->name }})</strong></div>
+              <div class="text-center"><strong>{{ @$customer->address }}</strong></div>
               <div class="float-right">
 				
                 </div>
@@ -68,8 +70,10 @@
 @section('JS_Code')
 <script type="text/javascript">
 $( document ).ready(function() {
-
-    
+    function print()
+    {
+         window.print();
+    }
 
 });
 </script>

@@ -1,6 +1,8 @@
 @extends('layouts.dashboard')
 
 @section('content')
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/3.2/select2.css" rel="stylesheet" />
+
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-12">
@@ -19,7 +21,7 @@
                         <div class="form-group row">
                             <div class="col-md-4">
                                 <label for="customer_id" class="col-form-label text-md-right">{{ __('Customer') }}</label>
-                                <select id="customer_id" name="customer_id" class="form-control @error('customer_id') is-invalid @enderror check_cls" required default=1>
+                                <select id="customer_id" name="customer_id" class="form-control @error('customer_id') is-invalid @enderror check_cls " required default=1>
                                     <option value="">--Select--</option>
                                     @foreach ($customers as $customer)
                                     <option value="{{ $customer->id }}"> {{ $customer->name }} </option>
@@ -173,6 +175,8 @@ function daysInMonth(month, year)
 }
  $( "#month" ).datepicker({ dateFormat: 'yy-mm' });
 });
+ $( "#month" ).datepicker({ dateFormat: 'yy-mm' });
+ $("#customer_id").select2();
 </script>
 @endsection
 
