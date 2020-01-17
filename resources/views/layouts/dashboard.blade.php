@@ -9,13 +9,13 @@
   <link rel="icon" href="https://getbootstrap.com/docs/4.0/assets/img/favicons/favicon.ico">
   <title>Data Mate</title>
   <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/dashboard/">
-
+  <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
   <!-- Bootstrap core CSS -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
   <!-- Custom styles for this template -->
-  <link href="/css/dashboard.css" rel="stylesheet">
-  <link href="/css/style.css" rel="stylesheet">
+  <link href="<?php echo url('/'); ?>/css/dashboard.css" rel="stylesheet">
+  <link href="<?php echo url('/'); ?>/css/style.css" rel="stylesheet">
 
   <!-- font awesome -->
   <script src="https://kit.fontawesome.com/9d093081ee.js" crossorigin="anonymous"></script>
@@ -48,41 +48,41 @@
     <div class="row">
       <nav class="col-md-2 d-none d-md-block sidebar">
         <div class="sidebar-sticky">
-          <ul class="nav flex-column">
+          <ul class="nav flex-column" style="margin-top: 19%;">
             <li class="nav-item p-1">
               <a class="nav-link" href="{{ route('home') }}" style="text-align: center;">
                 <!-- nav-active -->
-                <img src="/img/dashboard.png" style="height: 40px;"><br/>
+                <img src="<?php echo url('/'); ?>/img/dashboard.png" style="height: 40px;"><br/>
                 <span style=" color: #FEFEFE; font-size: 14px;">  Dashboard </span> 
               </a>
             </li>
             <li class="nav-item p-1">
               <a class="nav-link" href="{{ route('customers.index') }}" style="text-align: center;">
-                <img src="/img/student.png" style="height: 40px;"><br/>
+                <img src="<?php echo url('/'); ?>/img/student.png" style="height: 40px;"><br/>
                 <span style=" color: #FEFEFE; font-size: 14px;">  Customers </span> 
               </a>
             </li>
             <li class="nav-item p-1">
               <a class="nav-link" href="{{ route('products.index') }}" style="text-align: center;">
-                <img src="/img/library.png" style="height: 40px;"><br/>
+                <img src="<?php echo url('/'); ?>/img/library.png" style="height: 40px;"><br/>
                 <span style=" color: #FEFEFE; font-size: 14px;">  Products </span> 
               </a>
             </li>
             <li class="nav-item p-1">
               <a class="nav-link" href="{{ route('sales_vouchers.create') }}" style="text-align: center;">
-                <img src="/img/homework.png" style="height: 40px;"><br/>
+                <img src="<?php echo url('/'); ?>/img/homework.png" style="height: 40px;"><br/>
                 <span style=" color: #FEFEFE; font-size: 14px;">  Sales Vouchers </span> 
               </a>
             </li>
             <li class="nav-item p-1">
               <a class="nav-link" href="{{ route('payment_vouchers.index') }}" style="text-align: center;">
-                <img src="/img/calendar.png" style="height: 40px;"><br/>
+                <img src="<?php echo url('/'); ?>/img/calendar.png" style="height: 40px;"><br/>
                 <span style=" color: #FEFEFE; font-size: 14px;">  Payment Vouchers </span> 
               </a>
             </li>
             <li class="nav-item p-1">
               <a class="nav-link" href="{{ route('sales_vouchers.report_filter') }}" style="text-align: center;">
-                <img src="/img/stream.png" style="height: 40px;"><br/>
+                <img src="<?php echo url('/'); ?>/img/stream.png" style="height: 40px;"><br/>
                 <span style=" color: #FEFEFE; font-size: 14px;">  Report </span> 
               </a>
             </li>
@@ -94,7 +94,7 @@
             </li>-->
             <li class="nav-item p-1">
               <a class="nav-link" href="{{ route('users.index') }}" style="text-align: center;">
-                <img src="/img/user.png" style="height: 40px;"><br/>
+                <img src="<?php echo url('/'); ?>/img/user.png" style="height: 40px;"><br/>
                 <span style=" color: #FEFEFE; font-size: 14px;">  Users </span> 
               </a>
             </li>
@@ -110,6 +110,7 @@
 
     <!-- Bootstrap core JavaScript -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     

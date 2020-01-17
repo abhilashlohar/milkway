@@ -320,7 +320,7 @@ class SalesVoucherController extends Controller
                  $ids[$sales_voucher->month][date("d-m-Y",strtotime($SalesVoucherRow->month_date))] = $SalesVoucherRow->id;
             }
         } 
-        return view('sales_vouchers.month_detail',compact('sales_vouchers','request','arr','month','ids'));
+        return view('sales_vouchers.month_detail',compact('sales_voucher','request','arr','month','ids'));
     }
     
     public function product_report(Request $request)

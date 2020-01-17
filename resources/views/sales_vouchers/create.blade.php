@@ -8,6 +8,11 @@
                 <div class="card-header">{{ __('Add New Sales Voucher') }}</div>
 
                 <div class="card-body">
+                     @if(Session::has('success'))
+                <div class="alert alert-success" role="alert" data-dismiss="alert">
+                    <strong>Success! &nbsp;</strong> {{ Session::get('success') }}
+                </div>
+                @endif
                     <form method="POST" action="{{ route('sales_vouchers.store') }}">
                         @csrf
 
@@ -46,7 +51,7 @@
                         
                            <div class="col-md-4">
                                  <label for="month" class="col-form-label text-md-right">{{ __('Month') }}</label>
-                                <input id="month" type="month" class="form-control @error('create_date') is-invalid @enderror check_cls" name="month" value="<?php echo date('Y-m'); ?>" required>
+                                <input id="month" type="text" class="form-control @error('create_date') is-invalid @enderror check_cls" name="month" value="<?php echo date('Y-m'); ?>" required>
 
                                 @error('month')
                                     <span class="invalid-feedback" role="alert">
@@ -166,6 +171,7 @@ function daysInMonth(month, year)
     });
 
 }
+ $( "#month" ).datepicker({ dateFormat: 'yy-mm' });
 });
 </script>
 @endsection

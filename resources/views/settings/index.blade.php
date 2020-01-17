@@ -8,6 +8,11 @@
                 <div class="card-header">{{ __('Setting') }}</div>
 
                 <div class="card-body">
+                    @if(Session::has('success'))
+                <div class="alert alert-success" role="alert" data-dismiss="alert">
+                    <strong>Success! &nbsp;</strong> {{ Session::get('success') }}
+                </div>
+                @endif
                     <form method="POST" action="{{ route('settings.store') }}">
                         @csrf
 
