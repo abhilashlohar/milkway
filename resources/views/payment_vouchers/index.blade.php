@@ -12,6 +12,11 @@
             </div>
             
             <div class="card-body">
+                 @if(Session::has('success'))
+                <div class="alert alert-success" role="alert" data-dismiss="alert">
+                    <strong>Success! &nbsp;</strong> {{ Session::get('success') }}
+                </div>
+                @endifss
                 <form action="{{ route('payment_vouchers.index') }}" method="GET">
                   
                      <div class="row">

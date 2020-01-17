@@ -31,7 +31,7 @@
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label>Month</label>
-                                <input type="month" name="month" value="" class="form-control cDate" required>
+                                <input type="text" id="month" name="month" value="" class="form-control cDate" required>
                             </div>
                         </div>
                         <div class="col-md-12">
@@ -75,7 +75,7 @@
 <script type="text/javascript">
 $( document ).ready(function() {
 
-    
+     $( "#month" ).datepicker({ dateFormat: 'yy-mm' });
 
 });
 </script>
