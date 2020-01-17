@@ -16,11 +16,8 @@
                 <div class="alert alert-success" role="alert" data-dismiss="alert">
                     <strong>Success! &nbsp;</strong> {{ Session::get('success') }}
                 </div>
-<<<<<<< HEAD
+
                 @endif
-=======
-                @endifss
->>>>>>> fe3bb8be773879df5bf86363c7c862d077db1518
                 <form action="{{ route('payment_vouchers.index') }}" method="GET">
                   
                      <div class="row">

@@ -75,15 +75,9 @@
 @section('JS_Code')
 <script type="text/javascript">
 $( document ).ready(function() {
-<<<<<<< HEAD
-$( "#month" ).datepicker({ dateFormat: 'yy-mm' });
-    
-
-=======
-
      $( "#month" ).datepicker({ dateFormat: 'yy-mm' });
      $("#customer_id").select2();
->>>>>>> fe3bb8be773879df5bf86363c7c862d077db1518
+
 });
 </script>
 @endsection

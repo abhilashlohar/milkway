@@ -175,7 +175,7 @@ function daysInMonth(month, year)
 }
  $( "#month" ).datepicker({ dateFormat: 'yy-mm' });
 });
- $( "#month" ).datepicker({ dateFormat: 'yy-mm' });
+
  $("#customer_id").select2();
 </script>
 @endsection
